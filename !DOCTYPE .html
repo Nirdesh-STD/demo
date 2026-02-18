@@ -1,0 +1,239 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>I am so sorry! 🥺</title>
+
+<style>
+body{
+    margin:0;
+    height:100vh;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    background: radial-gradient(circle, #fff0f6 0%, #ffdee9 100%);
+    font-family:'Comic Sans MS', cursive;
+    overflow: hidden;
+}
+
+/* Flowers and Sparkles Background */
+.flower {
+    position: absolute;
+    font-size: 25px;
+    opacity: 0.4;
+    animation: rotate 10s linear infinite;
+    z-index: 0;
+}
+@keyframes rotate { from { transform: rotate(0deg); } to { transform: rotate(360deg); } }
+
+.card{
+    width:420px;
+    background:rgba(255, 255, 255, 0.95);
+    border-radius:40px;
+    padding:30px;
+    text-align:center;
+    box-shadow:0 25px 50px rgba(255, 79, 139, 0.3);
+    border: 5px solid #fff;
+    position: relative;
+    z-index: 10;
+}
+
+.thought-bubble {
+    background: #fff;
+    padding: 10px;
+    border-radius: 15px;
+    font-size: 14px;
+    margin-bottom: 10px;
+    color: #ff4f8b;
+    border: 1px dashed #ff4f8b;
+    min-height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.hidden{display:none;}
+h1{color:#ff4f8b; text-shadow: 2px 2px #ffe6f2;}
+p{font-size:15px; line-height:1.6;}
+
+button{
+    padding:10px 20px;
+    border:none;
+    border-radius:22px;
+    background:linear-gradient(to right, #ff4f8b, #ff8dad);
+    color:white;
+    font-size:14px;
+    margin:5px;
+    cursor:pointer;
+    transition:.2s;
+    font-weight: bold;
+}
+button:hover{transform:scale(1.1);}
+
+.scene{
+    display:flex;
+    justify-content:space-around;
+    align-items:flex-end;
+    margin:15px 0;
+    min-height: 100px;
+}
+.char{ font-size:70px; transition: 0.3s; }
+
+/* ANIMATIONS */
+.updown { animation: updown .3s infinite; }
+@keyframes updown { 0%, 100% {transform:translateY(0);} 50% {transform:translateY(-35px);} }
+
+.earpull { animation: earpull .4s infinite; }
+@keyframes earpull { 
+    0%, 100% {transform: scale(1) rotate(0deg);} 
+    50% {transform: scale(0.9) rotate(5deg) translateY(10px);} 
+}
+
+.puppy { animation: puppy 1s infinite; }
+@keyframes puppy {
+    0%, 100% { transform: scale(1) rotate(-3deg); }
+    50% { transform: scale(1.1) rotate(3deg); }
+}
+
+.party { animation:party .5s infinite alternate; }
+@keyframes party { from{transform:scale(1) rotate(-10deg);} to{transform:scale(1.2) rotate(10deg);} }
+</style>
+</head>
+
+<body onload="addFlowers()">
+
+<div class="card">
+    <div id="joke" class="thought-bubble">"Waiting for your mercy... 🎋"</div>
+
+<div id="s1">
+    <h1>Are you angry 🥺?</h1>
+    <button onclick="yes1()">Yes 😠</button>
+    <button onclick="forgiven()">No 😊</button>
+</div>
+
+<div id="s2" class="hidden">
+    <p>
+        Galti bhayo.<br>
+        <strong>"Sorry Sorry Sorry!"</strong><br>
+        It will not happen again, I promise!
+    </p>
+    <div class="scene">
+        <div class="char updown">🐼</div>
+    </div>
+    <button onclick="toPunish()">More punishment! 😤</button>
+    <button onclick="preFinal()">It's okay now 😌</button>
+</div>
+
+<div id="s3" class="hidden">
+    <h1>Punishment choose gara</h1>
+    <div class="scene">
+        <div id="panda" class="char">🐼</div>
+        <div class="char">🐰</div>
+    </div>
+    <button onclick="perform('updown', 'UP-DOWN! UP-DOWN! 🏃‍♂️💨', 'My legs are shaking... help!')">Up-Downs</button>
+    <button onclick="perform('earpull', 'Aiyaa! Aiyaa! Ouch! 🙇‍♂️', 'Sapana batai uthaune ho kyaa ho?')">Ear Pulling</button>
+    <button onclick="perform('puppy', 'Please forgive me? 🥺', 'I look so cute, right?')">Puppy Eyes</button>
+    <button onclick="giveChai()">Bribe with Chai ☕</button>
+</div>
+
+<div id="s4" class="hidden">
+    <h1>Performing... 🙇‍♂️</h1>
+    <div class="scene">
+        <div id="panda2" class="char">🐼</div>
+        <div id="bunny_wait" class="char">🐰</div>
+    </div>
+    <p id="action-text">Sorry sorry sorry! It won't happen again!</p>
+    <button onclick="toPunish()">Give more punishment! 😈</button>
+    <button onclick="preFinal()">Forgive now 💗</button>
+</div>
+
+<div id="prefinal" class="hidden">
+    <h1>One last thing... 🥺</h1>
+    <div class="scene">
+        <div class="char puppy">🐼</div>
+    </div>
+    <p>
+        Sacho galti bhayo, next time dhyan dinchu.<br>
+        Abba maaf gardeu na?
+    </p>
+    <button onclick="forgiven()">Ok Maaf Kiya 😊</button>
+</div>
+
+<div id="final" class="hidden">
+    <h1>Wau wauuuu! 🥳</h1>
+    <div class="scene">
+        <div class="char party">🐼✨</div>
+        <div class="char party">🐰✨</div>
+    </div>
+    <p>
+        Wau wau you’re the besttt! 😭💗<br>
+        Huhu here is your special Chai! ☕✨
+    </p>
+    <button onclick="location.reload()">Start Over ❤️</button>
+</div>
+
+</div>
+
+<script>
+function addFlowers() {
+    const symbols = ['🌸', '✨', '🌼', '💖', '🎋'];
+    for (let i = 0; i < 18; i++) {
+        let f = document.createElement('div');
+        f.className = 'flower';
+        f.innerText = symbols[Math.floor(Math.random()*symbols.length)];
+        f.style.left = Math.random() * 100 + 'vw';
+        f.style.top = Math.random() * 100 + 'vh';
+        f.style.animationDelay = (Math.random() * 5) + 's';
+        document.body.appendChild(f);
+    }
+}
+
+function yes1(){
+    document.getElementById('joke').innerText = "Initiating extreme apology mode... 🚨";
+    s1.style.display="none";
+    s2.style.display="block";
+}
+
+function toPunish(){
+    document.getElementById('joke').innerText = "I'm ready for more! I deserve it... 🫡";
+    s2.style.display="none";
+    s4.style.display="none";
+    s3.style.display="block";
+    prefinal.style.display="none";
+}
+
+function perform(anim, msg, joke){
+    document.getElementById('panda2').className = "char " + anim;
+    document.getElementById('panda2').innerText = (anim === 'earpull') ? "🐼😭" : "🐼";
+    document.getElementById('action-text').innerText = msg;
+    document.getElementById('joke').innerText = joke;
+    s3.style.display="none";
+    s4.style.display="block";
+}
+
+function giveChai() {
+    document.getElementById('panda2').className = "char party";
+    document.getElementById('panda2').innerText = "🐼☕";
+    document.getElementById('action-text').innerText = "Huhu... Garam Garam Chai for you!";
+    document.getElementById('joke').innerText = "Extra ginger and extra love for you! ☕✨";
+    s3.style.display="none";
+    s4.style.display="block";
+}
+
+function preFinal() {
+    s1.style.display="none";
+    s2.style.display="none";
+    s3.style.display="none";
+    s4.style.display="none";
+    prefinal.style.display="block";
+}
+
+function forgiven(){
+    prefinal.style.display="none";
+    s1.style.display="none";
+    final.style.display="block";
+}
+</script>
+
+</body>
+</html>
